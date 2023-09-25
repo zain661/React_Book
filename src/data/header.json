@@ -1,0 +1,21 @@
+{
+    "header": {
+        "menu": [
+            {
+                "link": "hero",
+                "title": "Home",
+                "isDropdown": false
+            },
+            {
+                "link": "benefits",
+                "title": "Benefits",
+                "isDropdown": false
+            },
+            {
+                "link": "contact",
+                "title": "Contact",
+                "isDropdown": false
+            }
+        ]
+    }
+}
