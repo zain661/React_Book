@@ -1,13 +1,26 @@
 import React from "react";
 import data from "../data/hero.json";
 import MailchimpSubscribe from "react-mailchimp-subscribe";
+import { useNavigate } from 'react-router-dom';
 function SubscribeForm() {
+  const navigate = useNavigate();
+  function handleClick(link){
+  
+    navigate(link);
+    }
   return (
     <form>
       <div className="input-group">
-        <input type="email" required placeholder="Your email" />
+        <input className="heroInput" type="email" required placeholder="Your Email" />
+        <p className="z">-zz</p>
+        <input className="heroInput" type="password" required placeholder="Your Password" />
         <button type="submit" className="button button__primary">
           <span>subscribe</span>
+        </button>
+        <p></p>
+        <span className="r">if you do not have an acoount, please register</span>
+        <button type="submit" className="rr" onClick={() => handleClick('/register')}>
+          <span>Sign up</span>
         </button>
       </div>
     </form>

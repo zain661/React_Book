@@ -2,13 +2,13 @@
     "header": {
         "menu": [
             {
-                "link": "hero",
+                "link": "/",
                 "title": "Home",
                 "isDropdown": false
             },
             {
-                "link": "benefits",
-                "title": "Benefits",
+                "link": "/book",
+                "title": "Search",
                 "isDropdown": false
             },
             {
