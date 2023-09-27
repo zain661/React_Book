@@ -1,11 +1,11 @@
 import React from "react";
 import Header from '../global/Header';
 import Hero from '../hero';
-const MainPage = ({header}) => {
+const MainPage = ({header}, {data}) => {
     return(
         <>
         <Header header= {header}/>
-        <Hero isBg='yes'/>
+        <Hero isBg='yes' name = {data}/>
         </>
         
     )

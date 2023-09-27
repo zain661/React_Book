@@ -6,10 +6,11 @@ import AOS from "aos";
 import BookList from "./components/BookList/BookList";
 import RecommenderedBooks from "./components/BookList/RecommenderedBooks";
 import Register from "./components/Register/Register"
-import { useEffect } from "react";
 import "./assets/css/aos.css";
 import "./assets/css/margins-paddings.css";
 import headerData from "./data/header.json";
+import React, { useState, useEffect } from "react";
+
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -18,7 +19,8 @@ function ScrollToTop() {
   return null;
 }
 function App() {
-  const { header } = headerData;
+ const [data,setData] = useState({})
+const { header } = headerData;
   useEffect(() => {
     AOS.init();
     AOS.refresh();
@@ -28,7 +30,7 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<MainPage header={header} />} />
+          <Route path="/login" element={<MainPage header={header} name = {data}/>} />
           <Route path="/book" element={<BookPage header={header} />} />
           <Route path="/bookList" element={<BookList />} />
           <Route path="/register" element={<Register/>}/>

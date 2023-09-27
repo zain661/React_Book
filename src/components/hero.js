@@ -1,33 +1,94 @@
-import React from "react";
+import React, { useState } from "react";
 import data from "../data/hero.json";
 import MailchimpSubscribe from "react-mailchimp-subscribe";
-import { useNavigate } from 'react-router-dom';
-function SubscribeForm() {
+import { useNavigate } from "react-router-dom";
+
+function SubscribeForm({}) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  function handleClick(link){
-  
+  function handleClick(link) {
     navigate(link);
+  }
+  const login = async () => {
+    try {
+      const response = await fetch('/login', { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+          password
+        })
+      });
+      
+      console.log('Response status:', response.status);
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const data = await response.json();
+      
+      console.log('Response:', data);
+    } catch (error) {
+      console.error('Error:', error);
     }
+  };
+  
+  
+  
+  
+  
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login();
+  };
+  
+  
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div className="input-group">
-        <input className="heroInput" type="email" required placeholder="Your Email" />
+        <input
+          className="heroInput"
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          placeholder="Your Email"
+        />
         <p className="z">-zz</p>
-        <input className="heroInput" type="password" required placeholder="Your Password" />
+        <input
+          className="heroInput"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          placeholder="Your Password"
+        />
         <button type="submit" className="button button__primary">
           <span>subscribe</span>
         </button>
         <p></p>
-        <span className="r">if you do not have an acoount, please register</span>
-        <button type="submit" className="rr" onClick={() => handleClick('/register')}>
-          <span>Sign up</span>
+        <span className="r">
+          if you do not have an acoount, please register
+        </span>
+        <button
+          type="submit"
+          className="rr"
+          onClick={() => handleClick("/register")}
+        >
+          <span>sign up</span>
         </button>
       </div>
     </form>
   );
 }
-const Hero = ({ isBg }) => {
+const Hero = ({ isBg }, {data1}) => {
   const { herov1 } = data;
+  console.log(data1?.message);
   return (
     <section
       id="hero"
@@ -52,6 +113,7 @@ const Hero = ({ isBg }) => {
               <MailchimpSubscribe
                 render={({ subscribe, status, message }) => (
                   <SubscribeForm
+                  name = {data1}
                     status={status}
                     message={message}
                     onValidated={(formData) => subscribe(formData)}
@@ -62,7 +124,7 @@ const Hero = ({ isBg }) => {
           </div>
           <div className="col-lg-6">
             <div className="hero__images text-center">
-              <img className="img-fluid" src={herov1.image} alt=""/>
+              <img className="img-fluid" src={herov1.image} alt="" />
               <div className="hero__images--badge">
                 <span>
                   <span className="hero__images--badge--text1">
