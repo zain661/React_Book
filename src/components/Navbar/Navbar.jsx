@@ -31,7 +31,7 @@ const Navbar = () => {
         <div className={toggleMenu ? "navbar-collapse show-navbar-collapse" : "navbar-collapse"}>
           <ul className = "navbar-nav">
             <li className='nav-item'>
-              <li to = "book" className='nav-link text-uppercase text-white fs-22 fw-6 ls-1' style={{margin: '-50px', padding: '10px' }} onClick={() => handleClick('/')}>Home</li>
+              <li to = "book" className='nav-link text-uppercase text-white fs-22 fw-6 ls-1' style={{margin: '-50px', padding: '10px' }} onClick={() => handleClick('/login')}>Home</li>
             </li>
           </ul>
         </div>

@@ -2,7 +2,7 @@
     "header": {
         "menu": [
             {
-                "link": "/",
+                "link": "/login",
                 "title": "Home",
                 "isDropdown": false
             },
