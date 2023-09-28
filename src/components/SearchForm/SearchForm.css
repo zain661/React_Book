@@ -1,10 +1,10 @@
 .search-form{
     width: 70%;
     /*max-width: 680px;*/
-    margin: 0px auto;
+    margin: 100px auto;
 }
 .search-form-elem{
-    padding: 1.4rem 2.8rem;
+    padding: 1rem 2.8rem;
     border-radius: 3.8rem;
 }
 .search-form-elem .form-control{
@@ -27,4 +27,8 @@
     outline: 0;
     font-family: inherit;
     font-size: 1.6rem;
+  }
+  .text-purple{
+    color: rgb(137, 101, 11);
+    margin: 10px;
   }

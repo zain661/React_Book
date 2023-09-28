@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import data from "../data/hero.json";
 import MailchimpSubscribe from "react-mailchimp-subscribe";
 import { useNavigate } from "react-router-dom";
-
-function SubscribeForm({}) {
+export const EmailContext = React.createContext();
+export function SubscribeForm({}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -12,81 +12,78 @@ function SubscribeForm({}) {
   }
   const login = async () => {
     try {
-      const response = await fetch('/login', { 
-        method: 'POST',
+      const response = await fetch("/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email,
-          password
-        })
+          password,
+        }),
       });
-      
-      console.log('Response status:', response.status);
-  
+
+      console.log("Response status:", response.status);
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
-  
+
       const data = await response.json();
-      
-      console.log('Response:', data);
+
+      console.log("Response:", data);
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
-  
-  
-  
-  
-  
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
     login();
   };
-  
-  
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="input-group">
-        <input
-          className="heroInput"
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          placeholder="Your Email"
-        />
-        <p className="z">-zz</p>
-        <input
-          className="heroInput"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          placeholder="Your Password"
-        />
-        <button type="submit" className="button button__primary">
-          <span>subscribe</span>
-        </button>
-        <p></p>
-        <span className="r">
-          if you do not have an acoount, please register
-        </span>
-        <button
-          type="submit"
-          className="rr"
-          onClick={() => handleClick("/register")}
-        >
-          <span>sign up</span>
-        </button>
-      </div>
-    </form>
+    <EmailContext.Provider value={email}>
+      <form onSubmit={handleSubmit}>
+        <div className="input-group">
+          <input
+            className="heroInput"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="Your Email"
+          />
+          <p className="z">-zz</p>
+          <input
+            className="heroInput"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="Your Password"
+          />
+          <button type="submit" className="button button__primary">
+            <span>subscribe</span>
+          </button>
+          <p></p>
+          <span className="r">
+            if you do not have an acoount, please register
+          </span>
+          <button
+            type="submit"
+            className="rr"
+            onClick={() => handleClick("/register")}
+          >
+            <span>sign up</span>
+          </button>
+        </div>
+      </form>
+    </EmailContext.Provider>
   );
 }
-const Hero = ({ isBg }, {data1}) => {
+
+const Hero = ({ isBg }, { data1 }) => {
   const { herov1 } = data;
   console.log(data1?.message);
   return (
@@ -113,7 +110,7 @@ const Hero = ({ isBg }, {data1}) => {
               <MailchimpSubscribe
                 render={({ subscribe, status, message }) => (
                   <SubscribeForm
-                  name = {data1}
+                    name={data1}
                     status={status}
                     message={message}
                     onValidated={(formData) => subscribe(formData)}

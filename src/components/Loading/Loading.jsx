@@ -3,10 +3,10 @@ import React from 'react';
 import "./Loading.css";
 
 const Loading = () => {
-    const LoaderImg = "../images/loader.svg"
+  const LoaderImg = "../images/loader.svg"
   return (
-    <div className='loader flex flex-c'>
-      <img src = {LoaderImg} alt = "loader" />
+    <div style={{marginTop : '200px' , marginLeft : '600px'}}>
+      <img src = '../assets/images/loader.svg' alt = "loader" />
     </div>
   )
 }
