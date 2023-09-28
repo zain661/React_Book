@@ -30,7 +30,7 @@ const { header } = headerData;
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
-          <Route path="/login" element={<MainPage header={header} name = {data}/>} />
+          <Route path="/" element={<MainPage header={header} name = {data}/>} />
           <Route path="/book" element={<BookPage header={header} />} />
           <Route path="/bookList" element={<BookList />} />
           <Route path="/register" element={<Register/>}/>

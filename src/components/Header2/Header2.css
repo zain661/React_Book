@@ -42,3 +42,6 @@
   .reco:hover {
     background-color: #ffd700;  /* Darker gold color on hover */
   }
+  .homeButton{
+    background-color: #ffd700;
+  }

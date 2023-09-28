@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useCallback } from "react";
+import { EmailContext } from "./components/hero";
 //import { useNavigate } from "react-router-dom";
 const URL = "https://openlibrary.org/search.json?title=";
 const AppContext = React.createContext();
@@ -10,9 +11,14 @@ const AppProvider = ({ children }) => {
   const [books2, setBooks2] = useState([]);
   const [loading, setLoading] = useState(true);
   const [resultTitle, setResultTitle] = useState("");
+  const email = useContext(EmailContext);
+
+  // Now you can use the email variable in this component
+  console.log("Email:", email);
   //const navigate = useNavigate();
 
   const fetchBooks = useCallback(async () => {
+    
     setLoading(true);
     try {
       const response = await fetch(`${URL}${searchTerm}`);
@@ -47,6 +53,7 @@ const AppProvider = ({ children }) => {
           setResultTitle("Your Search Result");
         } else {
           setResultTitle("No Search Result Found!");
+          console.log("kkkk")
         }
       } else {
         setBooks([]);
@@ -62,6 +69,7 @@ const AppProvider = ({ children }) => {
     user_id: 123, // Replace with the actual user ID or data
   };
   const handleClick = async () => {
+    
     try {
       const response = await fetch("/recommend", {
         method: "POST",

@@ -26,7 +26,7 @@ navigate(link);
         <div className="row">
           <Navbar bg="none" expand="lg">
             <a className="navbar-brand" href="/">
-              <img src={siteLogo.logo} alt={siteLogo.alt} />
+              <img src="../assets/images/siteLogo.jpg" alt={siteLogo.alt} style={{height : "45px"}}/>
             </a>
             <Navbar.Toggle aria-controls="navbarSupportedContent">
               <span></span>

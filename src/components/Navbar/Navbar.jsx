@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className='container navbar-content flex'>
         <div className='brand-and-toggler flex flex-sb' style= {{ marginTop: '-31px' }}>
           <Link to = "/book" className='navbar-brand flex'>
-          <img src={siteLogo.logo} alt={siteLogo.alt} />
+          <img src="../assets/images/siteLogo.jpg" alt={siteLogo.alt} style={{height : "45px"}}/>
             
           </Link>
           <button type = "button" className='navbar-toggler-btn' onClick={handleNavbar}>
@@ -31,7 +31,7 @@ const Navbar = () => {
         <div className={toggleMenu ? "navbar-collapse show-navbar-collapse" : "navbar-collapse"}>
           <ul className = "navbar-nav">
             <li className='nav-item'>
-              <li to = "book" className='nav-link text-uppercase text-white fs-22 fw-6 ls-1' style={{margin: '-50px', padding: '10px' }} onClick={() => handleClick('/login')}>Home</li>
+              <li to = "book" className='' style={{margin: '-50px', padding: '10px' ,fontWeight : '600px'}} onClick={() => handleClick('/')}>Home</li>
             </li>
           </ul>
         </div>

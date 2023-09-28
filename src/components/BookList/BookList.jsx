@@ -10,15 +10,16 @@ import Navbar from "../Navbar/Navbar";
 
 const BookList = () => {
   const {books, loading, resultTitle} = useGlobalContext();
+  const coverImg = '../assets/images/cover_not_found.jpg'
   const booksWithCovers = books.map((singleBook) => {
     return {
       ...singleBook,
       // removing /works/ to get only id
       id: (singleBook.id).replace("/works/", ""),
-      cover_img: singleBook.cover_id ? `https://covers.openlibrary.org/b/id/${singleBook.cover_id}-L.jpg` : '../images/cover_not_found.jpg'
+      cover_img: singleBook.cover_id ? `https://covers.openlibrary.org/b/id/${singleBook.cover_id}-L.jpg` : coverImg
     }
   });
-
+  
   if(loading) return <Loading />;
 
   return (

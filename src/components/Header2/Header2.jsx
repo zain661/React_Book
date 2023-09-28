@@ -4,6 +4,7 @@ import Navbar from "../Navbar/Navbar";
 import "./Header2.css";
 import SearchForm from '../SearchForm/SearchForm';
 import { useNavigate } from 'react-router-dom';
+import Header from '../global/Header';
 //import RecommenderedBooks from '../BookList/RecommenderedBooks';
 const Header2 = () => {
   //const {zYes, setzYes} = useState([]);
@@ -43,7 +44,30 @@ const Header2 = () => {
   return (
     <div className='holder'>
         <header className='header'>
-            <Navbar />
+        <div className="container">
+        <div className="row">
+          <Navbar bg="none" expand="lg">
+            <a className="navbar-brand" href="/">
+              <img src="../assets/images/siteLogo.jpg" alt="" style={{height : "45px"}}/>
+            </a>
+            <Navbar.Toggle aria-controls="navbarSupportedContent">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </Navbar.Toggle>
+            <Navbar.Collapse id="navbarSupportedContent">
+              <ul className="navbar-nav menu ms-lg-auto">
+                
+                      <li className='homeButton'  onClick={() => handleClick2('/')} style={{backgroundColor : "black"}}>Home</li>
+                   
+              </ul>
+            </Navbar.Collapse>
+          </Navbar>
+        </div>
+      </div>
             <div className='header-content flex flex-c text-center text-white' style={{margin: '0px auto', padding: '1px', color: 'white'}}>
               <div style={{marginTop : '120px'}}>
               <h2 className='find'>Find your book of choice.</h2><br />

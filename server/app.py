@@ -1,17 +1,25 @@
 from flask import Flask, request, jsonify, session, render_template
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS, cross_origin
-from scipy.sparse import csr_matrix
-# CORS is enabled for the entire application using CORS(app), and the cross_origin() decorator is applied to a specific route (/example) to allow cross-origin requests for that route. This is essential for enabling communication between a frontend client and a backend server when they are hosted on different domains or ports.
 from flask_session import Session
 from config import ApplicationConfig
-from models import db, User
+from models import db, User  
+import seeder 
+# from flask import Flask, request, jsonify, session, render_template
+# from flask_bcrypt import Bcrypt
+# from flask_cors import CORS, cross_origin
+from scipy.sparse import csr_matrix
+# CORS is enabled for the entire application using CORS(app), and the cross_origin() decorator is applied to a specific route (/example) to allow cross-origin requests for that route. This is essential for enabling communication between a frontend client and a backend server when they are hosted on different domains or ports.
+# from flask_session import Session
+# from config import ApplicationConfig
+# from models import db, User
 import pickle
 import pandas as pd
 import numpy as np
 from flask_login import LoginManager, UserMixin, login_user, current_user, login_required
 from sklearn.neighbors import NearestNeighbors
 from flask_login import LoginManager
+# from seeder import seed_data
 
 
 app = Flask(__name__)
@@ -25,14 +33,18 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
-login_manager = LoginManager()
-login_manager.login_view = '/login'  # Set the login view route
-login_manager.init_app(app)
-@login_manager.user_loader
-def load_user(user_id):
-    # Load the user from your database or user storage based on the user_id
-    user = User.query.get(int(user_id))
-    return user
+# Call the seed_data function directly
+
+# login_manager = LoginManager()
+# login_manager.login_view = '/login'  # Set the login view route
+# login_manager.init_app(app)
+
+
+# @login_manager.user_loader
+# def load_user(user_id):
+#     # Load the user from your database or user storage based on the user_id
+#     user = User.query.get(int(user_id))
+#     return user
 # login_manager = LoginManager()
 # login_manager.login_view = "/login"  # Set the login view route
 # login_manager.init_app(app)
@@ -42,7 +54,7 @@ def load_user(user_id):
     # return User(user_id)
 
 
-@app.route("/@me",methods=["GET", "POST"])
+@app.route("/@me", methods=["GET", "POST"])
 @cross_origin()
 def get_current_user():
     # This route allows authenticated users to retrieve their user information (ID and email) using the /@me endpoint. If a user is not authenticated, it returns an unauthorized error.
@@ -58,7 +70,7 @@ def get_current_user():
     })
 
 
-@app.route("/register",methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register_user():
     # this function handles the registration of a new user, ensuring they don't already exist, securely hashing their password, storing the user in the database, and using sessions to keep them authenticated. It then returns information about the registered user in JSON format.
     email = request.json["email"]
@@ -70,7 +82,7 @@ def register_user():
         return jsonify({"error": "User already exists"}), 409
 
     hashed_password = bcrypt.generate_password_hash(password)
-    new_user = User(email=email, password=hashed_password)
+    new_user = User(uder_id = user_id , email=email, password=hashed_password)
     db.session.add(new_user)
     db.session.commit()
 
@@ -82,7 +94,8 @@ def register_user():
         "email": new_user.email
     })
 
-@login_manager.user_loader
+
+#@login_manager.user_loader
 @app.route("/login", methods=["GET", "POST"])
 def login_user():
 
@@ -96,8 +109,8 @@ def login_user():
     if user is None:
         return jsonify({"error": "Unauthorized"}), 401
 
-    if not bcrypt.check_password_hash(user.password, password):
-        return jsonify({"error": "Unauthorized"}), 401
+    # if not bcrypt.check_password_hash(user.password, password):
+    #     return jsonify({"error": "Unauthorized"}), 401
 
     session["user_id"] = user.id
 
@@ -173,18 +186,20 @@ def get_book_info(isbn_list):
 
     return top_recommendations
 
-#@login_manager.user_loader
+# @login_manager.user_loader
+
+
 @app.route('/recommend', methods=["POST"])
-##@login_required
+# @login_required
 def recommend():
     try:
-        
+
         # Using the ID of the current logged-in user
         # user_id = current_user.id
-        user_id = 254
-        print('the current user id is :' , user_id)
+        user_id = parameter
+        print('the current user id is :', user_id)
         recommended_books = recommend_books(user_id)
-        #print(recommended_books)
+        # print(recommended_books)
         recommended_isbns = recommended_books.index.tolist()
         recommended_info = get_book_info(recommended_isbns)
 
@@ -222,4 +237,5 @@ def search():
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True)
+    #seeder.seed_data()
+    app.run(host='127.0.0.1', debug=True)
