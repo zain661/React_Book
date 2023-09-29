@@ -197,7 +197,7 @@ def recommend():
         # Using the ID of the current logged-in user
         # user_id = current_user.id
         request_data = request.get_json()
-        print(request_data)  # Get the JSON data from the request
+        #print(request_data)  # Get the JSON data from the request
         user_id = request_data['userId']
         recommended_books = recommend_books(user_id)
         # print(recommended_books)

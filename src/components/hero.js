@@ -66,7 +66,7 @@ export function SubscribeForm({}) {
           required
           placeholder="Your Password"
         />
-        <button type="submit" className="button button__primary">
+        <button type="submit" className="" id="sub">
           <span>subscribe</span>
         </button>
         <p></p>

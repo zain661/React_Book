@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useCallback } from "react";
 import { userIdContext } from "./components/context/userIdContext";
-import { BookSContext } from "./components/context/BookSContext";
+
 //import { useNavigate } from "react-router-dom";
 const URL = "https://openlibrary.org/search.json?title=";
 const AppContext = React.createContext();
@@ -13,12 +13,12 @@ const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [resultTitle, setResultTitle] = useState("");
   //const {email} = useContext(emailContext)
-  const { userId } = useContext(userIdContext);
-  const {BookS, setBookS} = useContext(BookSContext);
+  //const { userId } = useContext(userIdContext);
+  //let {BookS, setBookS} = useContext(userIdContext);
   // Now you can use the email variable in this component
 
   // This will print the updated email whenever it changes
-  console.log("UserId:", userId);
+  //console.log("UserId:", userId);
 
   //const navigate = useNavigate();
 
@@ -70,40 +70,41 @@ const AppProvider = ({ children }) => {
     }
   }, [searchTerm]);
 
-  const handleClick = async () => {
-    try {
-      const requestBody = { userId };
-      const response = await fetch("/recommend", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
+  // const handleClick = async () => {
+  //   try {
+  //     const requestBody = { userId };
+  //     const response = await fetch("/recommend", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(requestBody),
+  //     });
+  //     //console.log("anythongmygb")
+  //     console.log("Response status:", response.status);
 
-      console.log("Response status:", response.status);
+  //     if (!response.ok) {
+  //       throw new Error("Network response was not ok");
+  //     }
 
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      const data = await response.json();
-      setBookS(data);
-      console.log("Response:", data);
-      console.log(BookS);
-      //navigate("/RecommenderedBooks");
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+  //     const data = await response.json();
+      
+  //     console.log("Response:", data);
+  //     setBookS(data)
+  //     console.log(BookS);
+  //     //navigate("/RecommenderedBooks");
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
 
   useEffect(() => {
     fetchBooks();
   }, [searchTerm, fetchBooks]);
 
-  useEffect(() => {
-    handleClick();
-  }, []);
+  // useEffect(() => {
+  //   handleClick();
+  // }, [userId]);
   return (
     <AppContext.Provider
       value={{

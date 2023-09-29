@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from "react";
 import { Link , useLocation} from 'react-router-dom';
 import "./BookList.css";
 import Navbar from '../Navbar/Navbar';
 import Book2 from './Book2';
 import { useGlobalContext } from '../../context.';
+import { userIdContext } from "../context/userIdContext";
 
 const RecommenderedBooks = () => {
   
-  const {books2} = useGlobalContext();
+  const {BookS} = useContext(userIdContext);
   console.log("zayn")
-  console.log(books2)
   return (
     <section className='booklist'>
       <Navbar/>
@@ -19,7 +19,7 @@ const RecommenderedBooks = () => {
         </div>
         <div className='booklist-content grid'>
           {
-            books2?.map((item) => {
+            BookS?.map((item) => {
               return (
                 <Book2 itemData={item} />
               )
