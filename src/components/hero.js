@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import data from "../data/hero.json";
 import MailchimpSubscribe from "react-mailchimp-subscribe";
 import { useNavigate } from "react-router-dom";
-export const EmailContext = React.createContext();
+import { emailContext, userIdContext } from "./context/userIdContext";
+
 export function SubscribeForm({}) {
-  const [email, setEmail] = useState("");
+  const [ email, setEmail ] = useState("");
+  const { userId, setuserId } = useContext(userIdContext);
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
   function handleClick(link) {
     navigate(link);
   }
@@ -30,7 +33,8 @@ export function SubscribeForm({}) {
       }
 
       const data = await response.json();
-
+      //console.log(password)
+      setuserId(data.id)
       console.log("Response:", data);
     } catch (error) {
       console.error("Error:", error);
@@ -43,43 +47,41 @@ export function SubscribeForm({}) {
   };
 
   return (
-    <EmailContext.Provider value={email}>
-      <form onSubmit={handleSubmit}>
-        <div className="input-group">
-          <input
-            className="heroInput"
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            placeholder="Your Email"
-          />
-          <p className="z">-zz</p>
-          <input
-            className="heroInput"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            placeholder="Your Password"
-          />
-          <button type="submit" className="button button__primary">
-            <span>subscribe</span>
-          </button>
-          <p></p>
-          <span className="r">
-            if you do not have an acoount, please register
-          </span>
-          <button
-            type="submit"
-            className="rr"
-            onClick={() => handleClick("/register")}
-          >
-            <span>sign up</span>
-          </button>
-        </div>
-      </form>
-    </EmailContext.Provider>
+    <form onSubmit={handleSubmit}>
+      <div className="input-group">
+        <input
+          className="heroInput"
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          placeholder="Your Email"
+        />
+        <p className="z">-zz</p>
+        <input
+          className="heroInput"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          placeholder="Your Password"
+        />
+        <button type="submit" className="button button__primary">
+          <span>subscribe</span>
+        </button>
+        <p></p>
+        <span className="r">
+          if you do not have an acoount, please register
+        </span>
+        <button
+          type="submit"
+          className="rr"
+          onClick={() => handleClick("/register")}
+        >
+          <span>sign up</span>
+        </button>
+      </div>
+    </form>
   );
 }
 

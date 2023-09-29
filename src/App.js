@@ -5,11 +5,12 @@ import { AppProvider } from "./context.";
 import AOS from "aos";
 import BookList from "./components/BookList/BookList";
 import RecommenderedBooks from "./components/BookList/RecommenderedBooks";
-import Register from "./components/Register/Register"
+import Register from "./components/Register/Register";
 import "./assets/css/aos.css";
 import "./assets/css/margins-paddings.css";
 import headerData from "./data/header.json";
 import React, { useState, useEffect } from "react";
+import { userIdContext } from "./components/context/userIdContext";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -19,25 +20,35 @@ function ScrollToTop() {
   return null;
 }
 function App() {
- const [data,setData] = useState({})
-const { header } = headerData;
+  const [data, setData] = useState({});
+  const { header } = headerData;
   useEffect(() => {
     AOS.init();
     AOS.refresh();
   }, []);
+  const [userId, setuserId] = useState("");
+  const [BookS, setBookS] = useState([]);
   return (
-    <AppProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<MainPage header={header} name = {data}/>} />
-          <Route path="/book" element={<BookPage header={header} />} />
-          <Route path="/bookList" element={<BookList />} />
-          <Route path="/register" element={<Register/>}/>
-          <Route path="/RecommenderedBooks" element={<RecommenderedBooks/>}/>
-        </Routes>
-      </BrowserRouter>
-    </AppProvider>
+    <userIdContext.Provider value={{ userId, setuserId , BookS, setBookS}}>
+      <AppProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route
+              path="/"
+              element={<MainPage header={header} name={data} />}
+            />
+            <Route path="/book" element={<BookPage header={header} />} />
+            <Route path="/bookList" element={<BookList />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/RecommenderedBooks"
+              element={<RecommenderedBooks />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </AppProvider>
+    </userIdContext.Provider>
   );
 }
 /*<div

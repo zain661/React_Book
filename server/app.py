@@ -112,10 +112,10 @@ def login_user():
     # if not bcrypt.check_password_hash(user.password, password):
     #     return jsonify({"error": "Unauthorized"}), 401
 
-    session["user_id"] = user.id
+    session["user_id"] = user.user_id
 
     return jsonify({
-        "id": user.id,
+        "id": user.user_id,
         "email": user.email
     })
 
@@ -196,8 +196,9 @@ def recommend():
 
         # Using the ID of the current logged-in user
         # user_id = current_user.id
-        user_id = parameter
-        print('the current user id is :', user_id)
+        request_data = request.get_json()
+        print(request_data)  # Get the JSON data from the request
+        user_id = request_data['userId']
         recommended_books = recommend_books(user_id)
         # print(recommended_books)
         recommended_isbns = recommended_books.index.tolist()
