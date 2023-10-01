@@ -69,10 +69,10 @@ const Header2 = () => {
           </Navbar>
         </div>
       </div>
-            <div className='header-content flex flex-c text-center text-white' style={{margin: '0px auto', padding: '1px', color: 'white'}}>
+            <div className='header-content flex flex-c text-center text-white' style={{margin: '0px auto', padding: '1px', color: 'white', backgroundColor: "#f5ebe6"}}>
               <div style={{marginTop : '120px'}}>
               <h2 className='find'>Find your book of <span className="choice">choice.</span></h2><br />
-              <p>If you would like to see the recommended books</p>
+              <p className="ifYou">If you would like to see the recommended books</p>
               <button className = "reco" onClick={() => handleClick('/RecommenderedBooks')}>Recommended Books</button>
               {/* <Link to={{ pathname: '/RecommenderedBooks', state: { zYes } }}>
               </Link> */}

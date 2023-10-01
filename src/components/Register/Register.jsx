@@ -35,7 +35,7 @@ export default function Register() {
     <section className='.b'>
         <div className="register">
             <div className="col-1">
-                <h2>Sign In</h2>
+                <h2>Sign Up</h2>
                 <span>register and enjoy the service</span>
 
                 <form id='form' className='flex flex-col' onSubmit={handleSubmit(onSubmit)}>
@@ -43,7 +43,7 @@ export default function Register() {
                     <input type="text" {...register("password")} placeholder='password' />
                     {errors.mobile?.type === "required" && "Mobile Number is required"}
                     {errors.mobile?.type === "maxLength" && "Max Length Exceed"}
-                    <button className='btn'>Sign In</button>
+                    <button className='btn'>Sign Up</button>
                 </form>
 
             </div>

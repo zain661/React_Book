@@ -1,10 +1,11 @@
 
 .header-content{
     min-height: 90vh;
-    background: 
+    /* background: 
   linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-  url("../../../public/assets/images/zain.jpeg") center/cover no-repeat;
+  url("../../../public/assets/images/zain.jpeg") center/cover no-repeat; */
     flex-direction: column;
+    background-color: #f5ebe6;
 }
 
 .header-title{
@@ -27,12 +28,12 @@
 }
 
 .find{
-    color: rgba(245, 240, 210, 0.817);
+    color: #c27b7f;
     font-size: 50px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .reco {
-    background-color: #e5a85e;  /* Set the background color to gold */
+    background-color: #c27b7f;  /* Set the background color to gold */
     color: white;  /* Set the text color */
     border: none;  /* Remove border */
     padding: 10px 20px;  /* Adjust padding as needed */
@@ -41,13 +42,15 @@
     cursor: pointer;  /* Show a pointer cursor on hover */
     transition: 0.3;
   }
-  
+  .ifYou{
+    color: #c27b7f;
+  }
   /* Optional: Add hover effect */
   .reco:hover {
-    background-color: #bd7216;  /* Darker gold color on hover */
+    background-color: #f5ebe6;  /* Darker gold color on hover */
   }
   .homeButton{
-    background-color: #e5a85e;
+    background-color: #c27b7f;
   }
   /* .choice{
     color: #b1912e;
