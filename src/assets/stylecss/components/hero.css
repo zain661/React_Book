@@ -127,7 +127,10 @@
 .rr{
     background-color: #f5ebe6;
 }
-
+#sub{
+    background-color: #2f4858;
+    color: #fff;
+}
 /*  bounce animation */
 
 @keyframes upDown {

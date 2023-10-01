@@ -1,5 +1,6 @@
 .search-form{
-    width: 70%;
+    width: 60%;
+    height: 50px;
     /*max-width: 680px;*/
     margin: 100px auto;
 }
@@ -10,6 +11,8 @@
 .search-form-elem .form-control{
     font-size: 2rem;
     padding: 0.6rem;
+    border: none;
+    outline: 0;
 }
 .search-form-elem .form-control::placeholder{
     opacity: 0.9;
@@ -20,6 +23,7 @@
     font-family: inherit;
     background-color: transparent;
     cursor: pointer;
+    color: #e5a85e;
   }
   
   .form-control{
@@ -29,6 +33,6 @@
     font-size: 1.6rem;
   }
   .text-purple{
-    color: rgb(137, 101, 11);
+    color: #c27b7f;
     margin: 10px;
   }
